@@ -1,0 +1,47 @@
+table: auth_domains
+columns:
+  - name: auth_domain_id
+    type: serial
+    primary_key: true
+
+  - name: tenant_id
+    type: integer
+    nullable: false
+
+  # The lookup key. Typically a short tenant slug ('acme', 'globex'),
+  # a numeric tenant identifier, or a domain like 'acme.example.com'.
+  # The library reads this column via getOidcConfig(db, code).
+  - name: code
+    type: text
+    nullable: false
+
+  # The integration shape — 'oidc', 'saml', 'oauth2', etc. Whatever
+  # value your application understands. The library does not interpret
+  # this; it just returns it.
+  - name: integration_type
+    type: text
+    nullable: false
+
+  # Provider-specific configuration. For OIDC this typically includes
+  # clientId, clientSecret, issuer, redirectUri, scopes, etc. Stored
+  # as JSONB so the schema doesn't constrain what providers can put
+  # here.
+  - name: integration_params
+    type: jsonb
+    nullable: false
+    default: "'{}'::jsonb"
+
+  - name: created_at
+    type: timestamptz
+    nullable: false
+    default: now()
+
+  - name: updated_at
+    type: timestamptz
+    nullable: false
+    default: now()
+
+unique_constraints:
+  # `code` is the lookup key — must be unique across all tenants.
+  - columns: [code]
+    name: auth_domains_code_key

@@ -1,0 +1,65 @@
+# Test fixture — applied to the test database in place of the shipped
+# schema/tables/auth_domains.yaml. Identical column definition plus
+# inline seeds for the test data so getOidcConfig has rows to look up.
+#
+# Drift between this file and the shipped one is possible by mistake.
+# The drift-detect.test.ts file in tests/ parses both YAML files and
+# fails the build if their column lists or unique_constraints diverge.
+table: auth_domains
+columns:
+  - name: auth_domain_id
+    type: serial
+    primary_key: true
+
+  - name: tenant_id
+    type: integer
+    nullable: false
+
+  - name: code
+    type: text
+    nullable: false
+
+  - name: integration_type
+    type: text
+    nullable: false
+
+  - name: integration_params
+    type: jsonb
+    nullable: false
+    default: "'{}'::jsonb"
+
+  - name: created_at
+    type: timestamptz
+    nullable: false
+    default: now()
+
+  - name: updated_at
+    type: timestamptz
+    nullable: false
+    default: now()
+
+unique_constraints:
+  - columns: [code]
+    name: auth_domains_code_key
+
+# Test data inserted on first migrate. seeds_on_conflict: DO NOTHING
+# means re-running the migration is a no-op. Schema-flow uses the PK
+# (auth_domain_id) for conflict detection — explicit IDs are required
+# so re-runs match existing rows.
+seeds:
+  - auth_domain_id: 1
+    tenant_id: 1
+    code: 'acme'
+    integration_type: 'oidc'
+    integration_params: '{"clientId":"acme-client","clientSecret":"acme-secret","issuer":"https://idp.example.com/acme"}'
+  - auth_domain_id: 2
+    tenant_id: 2
+    code: 'globex'
+    integration_type: 'oidc'
+    integration_params: '{"clientId":"globex-client","clientSecret":"globex-secret","issuer":"https://idp.example.com/globex","scopes":["openid","profile","email"]}'
+  - auth_domain_id: 3
+    tenant_id: 3
+    code: 'umbrella'
+    integration_type: 'saml'
+    integration_params: '{"entityId":"https://umbrella.example.com","ssoUrl":"https://idp.example.com/umbrella/sso"}'
+seeds_on_conflict: 'DO NOTHING'
