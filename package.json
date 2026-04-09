@@ -1,6 +1,6 @@
 {
   "name": "@smplcty/oidc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tiny TypeScript helper for looking up per-tenant OIDC (and other) auth-domain configuration from a Postgres auth_domains table.",
   "license": "MIT",
   "type": "module",
