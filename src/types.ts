@@ -1,6 +1,19 @@
 import type { Pool, PoolClient } from 'pg';
 
 /**
+ * Validated claims extracted from an OIDC id_token after signature
+ * and standard claim verification.
+ */
+export interface OidcTokenPayload {
+  /** The `sub` (subject) claim — the provider's unique user ID. */
+  readonly sub: string;
+  /** The user's email, extracted from `email` or `preferred_username`. */
+  readonly email: string | undefined;
+  /** The `preferred_username` claim, if present. */
+  readonly preferredUsername: string | undefined;
+}
+
+/**
  * A `pg.Pool` or any single checked-out `pg.PoolClient`. Functions in
  * this library issue a single SELECT, so either works fine.
  */

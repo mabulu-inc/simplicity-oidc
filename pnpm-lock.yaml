@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      jose:
+        specifier: ^6.2.2
+        version: 6.2.2
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -949,6 +953,9 @@ packages:
   jiti@2.6.1:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
     hasBin: true
+
+  jose@6.2.2:
+    resolution: {integrity: sha512-d7kPDd34KO/YnzaDOlikGpOurfF0ByC2sEV4cANCtdqLlTfBlw2p14O/5d/zv40gJPbIQxfES3nSx1/oYNyuZQ==}
 
   json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
@@ -2514,6 +2521,8 @@ snapshots:
       lodash.uniqby: 4.7.0
 
   jiti@2.6.1: {}
+
+  jose@6.2.2: {}
 
   json-buffer@3.0.1: {}
 
