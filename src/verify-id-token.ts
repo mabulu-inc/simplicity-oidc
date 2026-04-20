@@ -100,7 +100,7 @@ async function getJwksUri(issuer: string): Promise<string> {
   let res: Response;
   try {
     res = await fetch(url);
-  } catch (err) {
+  } catch {
     throw new OidcError(
       `Failed to fetch OIDC discovery document from ${issuer}`,
     );
