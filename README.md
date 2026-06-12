@@ -1,5 +1,10 @@
 # @smplcty/oidc
 
+> [!WARNING]
+> **Deprecated — superseded by [`oauth4webapi`](https://github.com/panva/oauth4webapi).**
+> This package is a thin `jose` wrapper (`verifyIdToken` + `getOidcConfig`); `oauth4webapi` subsumes the verification and adds the full authorization-code/PKCE/token-exchange flow. `@smplcty/auth/oidc`'s `OidcHandler` is migrating to `oauth4webapi`, and new code should use `oauth4webapi` directly. This package will receive no further development.
+> Rationale: [`simplicity-auth` ADR-0001](https://github.com/mabulu-inc/simplicity-auth/blob/main/docs/adr/0001-oidc-via-oauth4webapi.md).
+
 Tiny TypeScript helper for looking up per-tenant OIDC (and other) auth-domain configuration from a Postgres `auth_domains` table.
 
 [![npm](https://img.shields.io/npm/v/@smplcty/oidc.svg)](https://www.npmjs.com/package/@smplcty/oidc)
